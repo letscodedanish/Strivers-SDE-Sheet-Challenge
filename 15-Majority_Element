@@ -2,16 +2,45 @@
 
 int findMajorityElement(int arr[], int n) {
 	// Write your code here.
-	int ans=0;
-	unordered_map<int,int> mp;
+	// int ans=0;
+	// unordered_map<int,int> mp;
+	// for(int i=0;i<n;i++){
+	// 	mp[arr[i]]++;
+	// }
+
+	// for(auto x:mp){
+	// 	if(x.second > n/2){
+	// 		return x.first;
+	// 	}
+	// }
+
+	// return -1;
+
+	//Moore's Voting Algorithm
+	int cnt=0;
+	int element;
 	for(int i=0;i<n;i++){
-		mp[arr[i]]++;
+		if(cnt==0){
+			cnt=1;
+			element=arr[i];
+		}
+		else if(arr[i]==element){
+			cnt++;
+		}
+		else{
+			cnt--;
+		}
 	}
 
-	for(auto x:mp){
-		if(x.second > n/2){
-			return x.first;
+	int cnt1=0;
+	for(int i=0;i<n;i++){
+		if(arr[i]==element){
+			cnt1++;
 		}
+	}
+
+	if(cnt1 > n/2){
+		return element;
 	}
 
 	return -1;
