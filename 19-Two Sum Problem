@@ -1,0 +1,72 @@
+//CodeStudio solution
+#include <bits/stdc++.h> 
+vector<vector<int>> pairSum(vector<int> &arr, int s){
+   vector <vector<int>> ans;
+    
+    for(int i=0;i<arr.size();i++){
+        for(int j=i+1;j<arr.size();j++){
+            if(arr[i]+arr[j] == s){
+                vector<int>temp;
+                temp.push_back(min(arr[i],arr[j]));
+                temp.push_back(max(arr[i],arr[j]));
+                ans.push_back(temp);
+            }
+        }
+    }
+    sort(ans.begin(),ans.end());
+   return ans;
+}
+
+//Leetcode solution
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        int n=nums.size();
+        //Brute Force Approch
+        // for(int i=0;i<n;i++){
+        //     for(int j=0;j<n;j++){
+        //         if(i != j && nums[i]+nums[j]==target){
+        //             return {i,j};
+        //         }
+        //     }
+        // }
+
+        // return {};
+
+        //Better approch
+        // unordered_map<int,int> mp;
+
+        // for(int i=0;i<n;i++){
+        //     if(mp.find(target - nums[i]) == mp.end()){
+        //         mp[nums[i]]=i;
+        //     }
+        //     else{
+        //         return {mp[target-nums[i]],i};
+        //     }
+        // }
+        // return {};
+
+        //optimal approach
+        vector<pair<int,int>> arr(n);
+        for(int i=0;i<n;++i){
+            arr[i] = make_pair(nums[i],i);
+        }
+
+        sort(arr.begin(),arr.end());
+        int left=0,right=n-1;
+        while(left < right){
+            int sum=arr[left].first + arr[right].first;
+            if(sum == target){
+                return {arr[left].second , arr[right].second};
+            }
+            else if(sum > target){
+                right--;
+            }
+            else{
+                left++;
+            }
+        }
+        return {};
+        
+    }
+};
