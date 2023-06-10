@@ -1,0 +1,47 @@
+#include <bits/stdc++.h> 
+#include <bits/stdc++.h> 
+string fourSum(vector<int> arr, int target, int n) {
+//     string index="";
+//     sort(arr.begin(),arr.end());
+//     unordered_map<int,pair<int,int>>mpp; //sum , value index
+//    for(int i=0;i<n-1;i++)
+//    {
+//        for(int j=1;j<n;j++)
+//        {int sum=arr[i]+arr[j];
+//         if(mpp.find(sum)==mpp.end())
+//         mpp[sum]=make_pair(i,j);}
+           
+//    }
+//     for(int i=0;i<n-1;i++)
+//     {    
+//         for(int j=i+1;j<n;j++)
+//         {    
+            
+//             int sum=target-(arr[i]+arr[j]);
+//             if(mpp.find(sum)!=mpp.end())
+//             {
+//                 int v1=mpp[sum].first;
+//                 int v2=mpp[sum].second;
+//                 if(v1!=i and v1!=j and 
+//                    v2!=i and v2!=j)
+//                 {
+                    
+//                     return "Yes";
+//                 }
+//             } 
+//         }
+//     }
+//     return "No";
+
+ sort(arr.begin(), arr.end());
+    for (int i = 0; i < n - 3; i++) {
+      for (int j = i+1; j < n - 2; j++) {
+        for (int k = j + 1, l = n - 1; k < l;) {
+          if (arr[i] + arr[j] + arr[k] + arr[l] == target) return "Yes";
+          else if (arr[i] + arr[j] + arr[k] + arr[l] > target) l--;
+          else k++;
+        }
+      }
+    }
+    return "No";
+}
