@@ -1,0 +1,82 @@
+#include <bits/stdc++.h>
+
+bool linearSearch(vector<int> &arr,int num){
+    for(int i=0;i<arr.size();i++){
+        if(arr[i]==num){
+            return true;
+        }
+    }
+    return false;
+}
+
+int lengthOfLongestConsecutiveSequence(vector<int> &arr, int n) {
+    // Write your code here.
+    //Brute Force Approch
+    //This soln will give TLE o(n^2)
+    // int longest=1;
+
+    // for(int i=0;i<n;i++){
+    //     int x=arr[i];
+    //     int cnt=1;
+    //     while(linearSearch(arr,x+1)==true){
+    //         x += 1;
+    //         cnt += 1;
+    //     }
+
+    //     longest=max(longest,cnt);
+    // }
+
+    // return longest;
+
+
+    //Better soln
+    //Here in this soln firstly we are sorting the given array
+    //and then we have lastSmaller element , and we are matching that with the next element
+    //if our arr[i]-1==lastSmaller we will increase the count and our lastSmaller will be arr[i]
+    //if the elements are not equal we will start fresh with count=1
+    //our answer will be max(longest,cnt);
+    // sort(arr.begin(),arr.end());
+    // int lastSmaller=INT_MIN;
+    // int cnt=0;
+    // int longest=1;
+
+    // for(int i=0;i<n;i++){
+    //     if(arr[i]-1 == lastSmaller){
+    //         cnt += 1;
+    //         lastSmaller=arr[i];
+    //     }
+    //     else if(arr[i] != lastSmaller){
+    //         cnt = 1;
+    //         lastSmaller = arr[i];
+    //     }
+    //     longest = max(longest,cnt);
+    // }
+    // return longest;
+
+    //Optimal soln
+    //step-1- Put everything into a set data structure
+
+    if(n==0) return 0;
+    int longest=1;
+    unordered_set<int> st;
+    for(int i=0;i<n;i++){
+        st.insert(arr[i]);
+    }
+
+    // 102,4,100,1,101,3,2,1,1
+    for(auto it:st){
+        if(st.find(it-1)==st.end()){//(100-1)=99 is not present in the set we go into this for loop that means ,
+        // we found the starting point
+            int cnt=1;
+            int x=it;
+            //After we got the staring point 100 , we will look for 101 if yes then x and cnt will increase by 1 
+            while(st.find(x+1) != st.end()){
+                x += 1;
+                cnt += 1;
+            }
+            longest=max(longest,cnt);
+        }
+    }
+
+    return longest;
+}
