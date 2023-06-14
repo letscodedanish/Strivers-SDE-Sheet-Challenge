@@ -1,0 +1,73 @@
+#include <bits/stdc++.h>
+
+/****************************************************************
+
+    Following is the class structure of the Node class:
+
+        class Node
+        {
+        public:
+	        int data;
+	        Node *next;
+	        Node(int data)
+	        {
+		        this->data = data;
+		        this->next = NULL;
+	        }
+        };
+
+*****************************************************************/
+
+Node* getListAfterReverseOperation(Node *head, int n, int arr[]) {
+
+        if(head == NULL or head->next == NULL)
+            return head;
+
+        Node* dummy = new Node(0);
+        dummy->next = head;
+
+        Node* prevNode = dummy;
+        Node* currNode;
+        Node* nextNode;
+
+        for(int index=0; index<n; index++)
+        {
+            int k = arr[index];
+
+            if(k==0)
+                continue;
+            if(k==1)
+            {
+                prevNode = prevNode->next;
+                continue;
+            }
+
+            //To reverse LL in groups of k
+            int count = k;
+
+            currNode = prevNode->next;
+            nextNode = currNode->next;
+
+            //because it's in groups of "k"
+            while(count!=1)
+            {
+                //to prevent NULL ptr exception
+                if(nextNode == NULL)
+                    return dummy->next;
+
+                currNode->next = nextNode->next;
+                nextNode->next = prevNode->next;
+                prevNode->next = nextNode;
+                nextNode = currNode->next;  
+
+                count--;
+            }
+            
+            prevNode = currNode;    
+
+            if(nextNode == NULL)
+                return dummy->next;        
+        }
+            
+        return dummy->next;
+    }
