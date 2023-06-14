@@ -1,0 +1,56 @@
+#include <bits/stdc++.h> 
+/****************************************************************
+
+    Following is the class structure of the LinkedListNode class:
+
+    template <typename T>
+    class LinkedListNode
+    {
+    public:
+        T data;
+        LinkedListNode<T> *next;
+        LinkedListNode(T data)
+        {
+            this->data = data;
+            this->next = NULL;
+        }
+    };
+
+*****************************************************************/
+
+bool isPalindrome(LinkedListNode<int> *head) {
+    // Write your code here.
+    LinkedListNode<int>* slow=head;
+    LinkedListNode<int>* fast=head;
+    
+    // METHOD 1: FINDING THE MID ELEMENT OF THE LINKEDLIST
+    while(fast!=NULL and fast->next!=NULL){
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    
+    // METHOD 2: REVERSING THE RIGHT OF MID OF THE LL
+    LinkedListNode<int>* prev = NULL;
+    LinkedListNode<int>* curr = slow;
+    LinkedListNode<int>* temp;
+    
+    while(curr!=NULL){
+        temp = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = temp;
+    }
+    
+    // Method 3: CHECKING IF LL IS PALINDROME
+    
+    fast =head;
+    while(prev!=NULL){
+        if(fast->data!=prev->data){
+            return false;
+        }
+        fast = fast->next;
+        prev = prev->next;
+    }
+    return true;
+    
+}
