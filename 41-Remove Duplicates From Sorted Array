@@ -1,0 +1,34 @@
+#include<set>
+int removeDuplicates(vector<int> &arr, int n) {
+	// Write your code here.
+	//Brute Force use set to remove duplicates
+	// set<int> st;
+	// for(int i=0;i<n;i++){
+	// 	st.insert(arr[i]);
+	// }
+
+	// return st.size();
+
+	//Optimal soln , using two pointer approaxh
+	// int i=0;
+	// for(int j=1;j<n;j++){
+	// 	if(arr[i+1] != arr[j]){
+	// 		arr[i+1]=arr[j];
+	// 		i++;
+	// 	}
+	// }
+
+	// return i+1;
+
+	// int cnt=0;
+	// for(int i=1;i<n;i++){
+	// 	if(arr[i]==arr[i-1]){
+	// 		cnt++;
+	// 	}
+	// 	else{
+	// 		arr[i-cnt]=arr[i];
+	// 	}
+	// }
+
+	// return n-cnt;
+}
