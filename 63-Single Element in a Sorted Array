@@ -1,0 +1,47 @@
+#include<unordered_map>
+int singleNonDuplicate(vector<int>& arr)
+{
+	// Write your code here
+
+	//Brute Force approch
+	//Using XOR, a^a=0
+	// int n=arr.size();
+	// int ele=0;
+	// for(int i=0;i<n;i++){
+	// 	ele=ele^arr[i];
+	// }
+	// return ele;
+
+	//Using map
+	// int n=arr.size();
+	// unordered_map<int,int> mp;
+
+	// for(int i=0;i<n;i++){
+	// 	mp[arr[i]]++;
+	// }
+
+	// for(auto i:mp){
+	// 	if(i.second == 1){
+	// 		return i.first;
+	// 	}
+	// }
+	// return -1;
+
+	
+
+	//Using Binary Search
+	int n=arr.size();
+	int low=0;
+	int high=n-2;
+
+	while(low<=high){
+		int mid=(low+high) >> 1;
+		if(arr[mid]==arr[mid^1]){
+			low=mid+1;
+		}
+		else{
+			high=mid-1;
+		}
+	}
+	return arr[low];
+}
