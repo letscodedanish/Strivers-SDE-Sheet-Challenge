@@ -1,0 +1,35 @@
+int search(int* arr, int n, int key) {
+    // Write your code here.
+    //Using Binary Search
+    int low=0;
+    int high=n-1;
+
+    while(low<=high){
+        int mid=(low+high)>>1;
+
+        if(arr[mid]==key) return mid;
+
+        //left half is sorted if
+        if(arr[low] <= arr[mid]){
+            //figure out your key is present in the left half or not
+            if(key >= arr[low] && key <= arr[mid]){
+                high=mid-1;
+            }
+            else{
+                low=mid+1;
+            }
+        }
+        //else right half is sorted
+        else{ 
+            //figure out your key is present in the right half or not
+            if(key >= arr[mid] && key <= arr[high]){
+                low=mid+1;
+            }
+            else{
+                high=mid-1;
+            }
+        }
+    }
+
+    return -1;
+}
